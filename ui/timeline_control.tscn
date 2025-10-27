@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://dui040ewlwphd"]
+
+[ext_resource type="Script" uid="uid://bbv8wc4k7d40j" path="res://ui/timeline_control.gd" id="1_7s6fs"]
+[ext_resource type="PackedScene" uid="uid://cyxxt4whwt2ir" path="res://ui/timeline_frame_control.tscn" id="2_hfvlq"]
+[ext_resource type="ButtonGroup" uid="uid://c8wqjm4g6grq3" path="res://ui/timeline_frame_control_button_group.tres" id="2_s0p2y"]
+
+[node name="TimelineControl" type="MarginContainer" node_paths=PackedStringArray("frame_controls")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7s6fs")
+frame_controls = [NodePath("HBoxContainer/TimelineFrameControl"), NodePath("HBoxContainer/TimelineFrameControl2"), NodePath("HBoxContainer/TimelineFrameControl3"), NodePath("HBoxContainer/TimelineFrameControl4")]
+select_frame_button_group = ExtResource("2_s0p2y")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TimelineFrameControl" parent="HBoxContainer" instance=ExtResource("2_hfvlq")]
+layout_mode = 2
+
+[node name="TimelineFrameControl2" parent="HBoxContainer" instance=ExtResource("2_hfvlq")]
+layout_mode = 2
+
+[node name="TimelineFrameControl3" parent="HBoxContainer" instance=ExtResource("2_hfvlq")]
+layout_mode = 2
+
+[node name="TimelineFrameControl4" parent="HBoxContainer" instance=ExtResource("2_hfvlq")]
+layout_mode = 2

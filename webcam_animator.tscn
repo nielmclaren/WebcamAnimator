@@ -1,19 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://fnvif5ajj4mq"]
+[gd_scene load_steps=7 format=3 uid="uid://fnvif5ajj4mq"]
 
 [ext_resource type="Script" uid="uid://bhbv87wyxjivd" path="res://webcam_animator.gd" id="1_4eb07"]
 [ext_resource type="Texture2D" uid="uid://cr0umu1x0yigp" path="res://icon.svg" id="1_ca471"]
 [ext_resource type="Theme" uid="uid://lmmxf7s8jsfe" path="res://assets/theme.tres" id="1_vrwaq"]
+[ext_resource type="PackedScene" uid="uid://dui040ewlwphd" path="res://ui/timeline_control.tscn" id="4_2rrvt"]
 [ext_resource type="PackedScene" uid="uid://bwm581ylae878" path="res://managers/webcam_manager.tscn" id="4_88dam"]
 
-[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "webcam_texture", "shoot_button", "latest_shot_texture")]
+[sub_resource type="ButtonGroup" id="ButtonGroup_2rrvt"]
+allow_unpress = true
+
+[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "webcam_texture", "shoot_button", "latest_shot_texture", "anim_texture", "timeline_control")]
 script = ExtResource("1_4eb07")
 webcam_manager = NodePath("WebcamManager")
 webcam_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay/WebcamTexture")
 shoot_button = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamButtons/ShootButton")
 latest_shot_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay/LatestShotTexture")
+anim_texture = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay/AnimTexture")
+timeline_control = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/TimelineControl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-custom_minimum_size = Vector2(1920, 1020)
+custom_minimum_size = Vector2(1920, 1080)
+offset_right = 1920.0
+offset_bottom = 1088.0
 theme = ExtResource("1_vrwaq")
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 20
@@ -61,10 +69,28 @@ layout_mode = 2
 texture = ExtResource("1_ca471")
 expand_mode = 1
 
-[node name="RecentShotsGrid" type="GridContainer" parent="MarginContainer/HBoxContainer/WebcamPanel"]
-layout_mode = 2
-
 [node name="AnimPanel" type="VBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer/AnimPanel"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AnimDisplay" type="MarginContainer" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+
+[node name="AnimTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay"]
+layout_mode = 2
+texture = ExtResource("1_ca471")
+expand_mode = 3
+
+[node name="TimelineControl" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer" instance=ExtResource("4_2rrvt")]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+select_frame_button_group = SubResource("ButtonGroup_2rrvt")
 
 [node name="WebcamManager" parent="." instance=ExtResource("4_88dam")]

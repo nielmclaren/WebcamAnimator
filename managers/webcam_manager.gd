@@ -32,12 +32,21 @@ func _camera_feeds_updated() -> void:
 		push_warning("WebcamManager No matching camera camera_name=", _target_camera_name)
 		return
 
-	print("WebcamManager Using camera id=", _camera.get_id(), " ", _camera, " (", _camera.get_name(), ")")
+	print(
+		"WebcamManager Using camera id=",
+		_camera.get_id(),
+		" ",
+		_camera,
+		" (",
+		_camera.get_name(),
+		")"
+	)
 
 	print("WebcamManager Number of formats: ", _camera.formats.size())
 	for index: int in _camera.formats.size():
 		print(index, "\t", _camera.formats[index])
 
+	# TODO: Don't hardcode the format index?
 	var format_index: int = 8
 	var format: Dictionary = _camera.formats[format_index]
 	print("WebcamManager Using format: ", format)
