@@ -1,5 +1,10 @@
 extends Node
 
+func duplicate_texture(texture: Texture2D) -> Texture2D:
+	var image: Image = texture.get_image().duplicate()
+	return ImageTexture.create_from_image(image)
+
+
 func get_feed_position_string(value: CameraFeed.FeedPosition) -> String:
 	match value:
 		CameraFeed.FeedPosition.FEED_FRONT:
