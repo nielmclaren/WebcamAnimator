@@ -10,14 +10,14 @@
 [sub_resource type="ButtonGroup" id="ButtonGroup_2rrvt"]
 allow_unpress = true
 
-[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "save_manager", "webcam_texture", "shoot_button", "latest_shot_texture", "anim_texture", "timeline_control")]
+[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "save_manager", "webcam_texrect", "shoot_button", "latest_shot_texrect", "anim_texrect", "timeline_control")]
 script = ExtResource("1_4eb07")
 webcam_manager = NodePath("WebcamManager")
 save_manager = NodePath("SaveManager")
-webcam_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay/WebcamTexture")
+webcam_texrect = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay/WebcamTexrect")
 shoot_button = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamButtons/ShootButton")
-latest_shot_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay/LatestShotTexture")
-anim_texture = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay/AnimTexture")
+latest_shot_texrect = NodePath("MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay/LatestShotTexrect")
+anim_texrect = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay/AnimTexrect")
 timeline_control = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/TimelineControl")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -44,7 +44,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="WebcamTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay"]
+[node name="WebcamTexrect" type="TextureRect" parent="MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay"]
 layout_mode = 2
 texture = ExtResource("1_ca471")
 expand_mode = 1
@@ -66,7 +66,7 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="LatestShotTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay"]
+[node name="LatestShotTexrect" type="TextureRect" parent="MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay"]
 layout_mode = 2
 texture = ExtResource("1_ca471")
 expand_mode = 1
@@ -82,10 +82,9 @@ size_flags_vertical = 3
 [node name="AnimDisplay" type="MarginContainer" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer"]
 custom_minimum_size = Vector2(640, 360)
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 3
 
-[node name="AnimTexture" type="TextureRect" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay"]
+[node name="AnimTexrect" type="TextureRect" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay"]
 layout_mode = 2
 texture = ExtResource("1_ca471")
 expand_mode = 3

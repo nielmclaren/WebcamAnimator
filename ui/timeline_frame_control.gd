@@ -1,7 +1,7 @@
 class_name TimelineFrameControl
 extends Control
 
-@export var frame_texture: TextureRect
+@export var frame_texrect: TextureRect
 @export var select_button: Button
 @export var current_indicator: ColorRect
 
@@ -17,7 +17,7 @@ func setup(webcam_animator: WebcamAnimator, index: int) -> TimelineFrameControl:
 
 
 func get_frame() -> Texture2D:
-	return frame_texture.texture
+	return frame_texrect.texture
 
 
 func is_current() -> bool:
@@ -29,11 +29,11 @@ func is_selected() -> bool:
 
 
 func load() -> void:
-	frame_texture.texture = _webcam_animator.save_manager.load_frame(_frame_index)
+	frame_texrect.texture = _webcam_animator.save_manager.load_frame(_frame_index)
 
 
 func save() -> void:
-	_webcam_animator.save_manager.save_frame(_frame_index, frame_texture.texture)
+	_webcam_animator.save_manager.save_frame(_frame_index, frame_texrect.texture)
 
 
 func set_button_group(group: ButtonGroup) -> void:
@@ -49,5 +49,5 @@ func set_is_current(value: bool) -> void:
 
 
 func write_frame(texture: Texture2D) -> void:
-	frame_texture.texture = Utils.duplicate_texture(texture)
+	frame_texrect.texture = Utils.duplicate_texture(texture)
 	save()
