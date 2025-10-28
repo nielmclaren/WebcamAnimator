@@ -7,6 +7,3 @@
 script = ExtResource("1_ig7tw")
 
 [node name="WebcamAnimator" parent="." instance=ExtResource("2_0xm2m")]
-custom_minimum_size = Vector2(1920, 1080)
-offset_right = 1920.0
-offset_bottom = 1080.0

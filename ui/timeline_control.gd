@@ -6,12 +6,29 @@ extends Control
 
 signal frame_changed
 
+var _webcam_animator: WebcamAnimator
+
 var _frame_index: int = 0
 var _anim_timer: Timer
 
 
+func setup(webcam_animator: WebcamAnimator) -> TimelineControl:
+	_webcam_animator = webcam_animator
+
+	for index: int in frame_controls.size():
+		var frame: TimelineFrameControl = frame_controls[index]
+		frame.setup(_webcam_animator, index)
+
+	return self
+
+
 func get_frame_texture() -> Texture2D:
 	return frame_controls[_frame_index].get_frame()
+
+
+func load() -> void:
+	for frame: TimelineFrameControl in frame_controls:
+		frame.load()
 
 
 func write_selected_frames(texture: Texture2D) -> void:

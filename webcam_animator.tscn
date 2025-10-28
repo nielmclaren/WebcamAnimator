@@ -1,17 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://fnvif5ajj4mq"]
+[gd_scene load_steps=8 format=3 uid="uid://fnvif5ajj4mq"]
 
 [ext_resource type="Script" uid="uid://bhbv87wyxjivd" path="res://webcam_animator.gd" id="1_4eb07"]
 [ext_resource type="Texture2D" uid="uid://cr0umu1x0yigp" path="res://icon.svg" id="1_ca471"]
 [ext_resource type="Theme" uid="uid://lmmxf7s8jsfe" path="res://assets/theme.tres" id="1_vrwaq"]
 [ext_resource type="PackedScene" uid="uid://dui040ewlwphd" path="res://ui/timeline_control.tscn" id="4_2rrvt"]
 [ext_resource type="PackedScene" uid="uid://bwm581ylae878" path="res://managers/webcam_manager.tscn" id="4_88dam"]
+[ext_resource type="PackedScene" uid="uid://d3kuwguwerclg" path="res://managers/save_manager.tscn" id="6_np4gn"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_2rrvt"]
 allow_unpress = true
 
-[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "webcam_texture", "shoot_button", "latest_shot_texture", "anim_texture", "timeline_control")]
+[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "save_manager", "webcam_texture", "shoot_button", "latest_shot_texture", "anim_texture", "timeline_control")]
 script = ExtResource("1_4eb07")
 webcam_manager = NodePath("WebcamManager")
+save_manager = NodePath("SaveManager")
 webcam_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay/WebcamTexture")
 shoot_button = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamButtons/ShootButton")
 latest_shot_texture = NodePath("MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay/LatestShotTexture")
@@ -92,5 +94,7 @@ expand_mode = 3
 custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 select_frame_button_group = SubResource("ButtonGroup_2rrvt")
+
+[node name="SaveManager" parent="." instance=ExtResource("6_np4gn")]
 
 [node name="WebcamManager" parent="." instance=ExtResource("4_88dam")]
