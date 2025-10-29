@@ -45,10 +45,12 @@ func _load() -> void:
 	anim_texrect.texture = save_manager.load_frame(0)
 	timeline_control.load()
 
+
 func _play() -> void:
 	pause_button.button_pressed = false
 	play_button.button_pressed = true
 	timeline_control.play()
+
 
 func _pause() -> void:
 	pause_button.button_pressed = true

@@ -14,7 +14,7 @@ func _init() -> void:
 	_texture = CameraTexture.new()
 
 
-func _ready():
+func _ready() -> void:
 	CameraServer.monitoring_feeds = true
 	CameraServer.camera_feeds_updated.connect(_camera_feeds_updated)
 
