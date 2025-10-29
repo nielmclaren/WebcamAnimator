@@ -42,12 +42,14 @@ func _camera_feeds_updated() -> void:
 		")"
 	)
 
-	print("WebcamManager Number of formats: ", _camera.formats.size())
+	#print("WebcamManager Number of formats: ", _camera.formats.size())
 	for index: int in _camera.formats.size():
-		print(index, "\t", _camera.formats[index])
+		#print(index, "\t", _camera.formats[index])
+		pass
 
 	# TODO: Don't hardcode the format index?
 	var format_index: int = 8
+
 	var format: Dictionary = _camera.formats[format_index]
 	print("WebcamManager Using format: ", format)
 	var format_result: bool = _camera.set_format(format_index, {})

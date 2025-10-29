@@ -1,23 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://fnvif5ajj4mq"]
+[gd_scene load_steps=9 format=3 uid="uid://fnvif5ajj4mq"]
 
 [ext_resource type="Script" uid="uid://bhbv87wyxjivd" path="res://webcam_animator.gd" id="1_4eb07"]
 [ext_resource type="Texture2D" uid="uid://cr0umu1x0yigp" path="res://icon.svg" id="1_ca471"]
 [ext_resource type="Theme" uid="uid://lmmxf7s8jsfe" path="res://assets/theme.tres" id="1_vrwaq"]
 [ext_resource type="PackedScene" uid="uid://dui040ewlwphd" path="res://ui/timeline_control.tscn" id="4_2rrvt"]
 [ext_resource type="PackedScene" uid="uid://bwm581ylae878" path="res://managers/webcam_manager.tscn" id="4_88dam"]
+[ext_resource type="PackedScene" uid="uid://df4djvkkrrnah" path="res://ui/crop_control.tscn" id="4_fbr5f"]
 [ext_resource type="PackedScene" uid="uid://d3kuwguwerclg" path="res://managers/save_manager.tscn" id="6_np4gn"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_2rrvt"]
 allow_unpress = true
 
-[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "save_manager", "webcam_texrect", "shoot_button", "latest_shot_texrect", "anim_texrect", "play_button", "pause_button", "timeline_control")]
+[node name="WebcamAnimator" type="Node2D" node_paths=PackedStringArray("webcam_manager", "save_manager", "webcam_texrect", "shoot_button", "latest_shot_texrect", "anim_texrect", "crop_control", "play_button", "pause_button", "timeline_control")]
 script = ExtResource("1_4eb07")
 webcam_manager = NodePath("WebcamManager")
 save_manager = NodePath("SaveManager")
 webcam_texrect = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamDisplay/WebcamTexrect")
 shoot_button = NodePath("MarginContainer/HBoxContainer/WebcamPanel/WebcamButtons/ShootButton")
 latest_shot_texrect = NodePath("MarginContainer/HBoxContainer/WebcamPanel/LatestShotDisplay/LatestShotTexrect")
-anim_texrect = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay/AnimTexrect")
+anim_texrect = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/Control/AnimDisplay/AnimTexrect")
+crop_control = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/Control/CropControl")
 play_button = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/HBoxContainer/PlayButton")
 pause_button = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/HBoxContainer/PauseButton")
 timeline_control = NodePath("MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/TimelineControl")
@@ -81,15 +83,25 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AnimDisplay" type="MarginContainer" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer"]
-custom_minimum_size = Vector2(640, 360)
+[node name="Control" type="Control" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="AnimTexrect" type="TextureRect" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/AnimDisplay"]
+[node name="AnimDisplay" type="MarginContainer" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/Control"]
+custom_minimum_size = Vector2(640, 360)
+layout_mode = 0
+offset_top = 4.0
+offset_right = 1536.0
+offset_bottom = 809.0
+size_flags_vertical = 3
+
+[node name="AnimTexrect" type="TextureRect" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/Control/AnimDisplay"]
 layout_mode = 2
 texture = ExtResource("1_ca471")
 expand_mode = 3
+
+[node name="CropControl" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer/Control" instance=ExtResource("4_fbr5f")]
+layout_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer/AnimPanel/VBoxContainer"]
 layout_mode = 2
