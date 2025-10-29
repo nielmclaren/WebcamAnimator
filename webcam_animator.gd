@@ -8,6 +8,8 @@ extends Node2D
 @export var shoot_button: Button
 @export var latest_shot_texrect: TextureRect
 @export var anim_texrect: TextureRect
+@export var play_button: Button
+@export var pause_button: Button
 @export var timeline_control: TimelineControl
 
 
@@ -18,6 +20,9 @@ func _ready() -> void:
 
 	timeline_control.setup(self)
 	timeline_control.frame_changed.connect(_timeline_control_frame_changed)
+
+	play_button.pressed.connect(_play)
+	pause_button.pressed.connect(_pause)
 
 	_load()
 
@@ -39,3 +44,13 @@ func _load() -> void:
 	latest_shot_texrect.texture = save_manager.load_latest_shot()
 	anim_texrect.texture = save_manager.load_frame(0)
 	timeline_control.load()
+
+func _play() -> void:
+	pause_button.button_pressed = false
+	play_button.button_pressed = true
+	timeline_control.play()
+
+func _pause() -> void:
+	pause_button.button_pressed = true
+	play_button.button_pressed = false
+	timeline_control.pause()

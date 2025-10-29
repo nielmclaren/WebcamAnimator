@@ -8,6 +8,7 @@ signal frame_changed
 
 var _webcam_animator: WebcamAnimator
 
+var _is_playing: bool = false
 var _frame_index: int = 0
 var _anim_timer: Timer
 var _selected_frame: TimelineFrameControl
@@ -32,6 +33,16 @@ func load() -> void:
 		frame.load()
 
 
+func pause() -> void:
+	_is_playing = false
+	_anim_timer.stop()
+
+
+func play() -> void:
+	_is_playing = true
+	_anim_timer.start()
+
+
 func write_selected_frames(texture: Texture2D) -> void:
 	for frame: TimelineFrameControl in frame_controls:
 		if frame.is_selected():
@@ -54,7 +65,8 @@ func _init_anim_timer() -> void:
 	_anim_timer.wait_time = 0.5
 
 	add_child(_anim_timer)
-	_anim_timer.start()
+	if _is_playing:
+		_anim_timer.start()
 
 
 func _anim_timer_timeout() -> void:
