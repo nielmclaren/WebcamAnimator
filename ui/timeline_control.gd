@@ -10,6 +10,7 @@ var _webcam_animator: WebcamAnimator
 
 var _frame_index: int = 0
 var _anim_timer: Timer
+var _selected_frame: TimelineFrameControl
 
 
 func setup(webcam_animator: WebcamAnimator) -> TimelineControl:
@@ -35,11 +36,14 @@ func write_selected_frames(texture: Texture2D) -> void:
 	for frame: TimelineFrameControl in frame_controls:
 		if frame.is_selected():
 			frame.write_frame(texture)
+			frame.set_is_selected(false)
 
 
 func _ready() -> void:
 	for frame: TimelineFrameControl in frame_controls:
 		frame.set_button_group(select_frame_button_group)
+		frame.selected.connect(_frame_selected.bind(frame))
+		frame.deselected.connect(_frame_deselected.bind(frame))
 
 	_init_anim_timer()
 
@@ -63,3 +67,13 @@ func _anim_timer_timeout() -> void:
 	frame_controls[_frame_index].set_is_current(true)
 
 	frame_changed.emit()
+
+
+func _frame_selected(frame_control: TimelineFrameControl) -> void:
+	_selected_frame = frame_control
+	_selected_frame.set_live_texture(_webcam_animator.webcam_manager.get_texture())
+
+
+func _frame_deselected(frame_control: TimelineFrameControl) -> void:
+	_selected_frame = frame_control
+	_selected_frame.unset_live_texture()
